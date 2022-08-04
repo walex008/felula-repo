@@ -13,7 +13,7 @@
 
                     <!-- ======= Single Post Content ======= -->
                     <div class="single-post">
-                        <div class="post-meta"><span class="date">{{$post->category->name}}</span> <span class="mx-1">&bullet;</span> <span>{{$post->created_at->diffForHumans()}}</span></div>
+                        <div class="post-meta"><span class="date"><a href="{{route('blog.category', $post->category->id)}}">{{$post->category->name}}</a></span> <span class="mx-1">&bullet;</span> <span>{{$post->created_at->diffForHumans()}}</span></div>
                         <h1 class="mb-5">{{$post->title}}</h1>
                         <p><span class="firstcharacter">L</span></p>
 

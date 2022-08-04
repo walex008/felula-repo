@@ -17,12 +17,21 @@ class WelcomeController extends Controller
             ->with('tags', Tag::all())
             ->with('users', User::all())
             ->with('latest_post', Post::latest()->first())
-            ->with('trending_posts', Post::latest()->limit(10)->get())
-            ->with('old_posts', Post::simplePaginate(2));
+            ->with('trending_posts', Post::latest()->limit(4)->get())
+            ->with('old_posts', Post::simplePaginate(4));
 
     }
 
     public function show(Post $post){
-        return view('blog.show')->with('post', $post);
+        return view('blog.show')->with('post', $post)->with('category', $post->category());
+    }
+
+    public function category(Category $category){
+//        dd($category->name);
+        return view('blog.category')
+            ->with('category', $category)
+            ->with('posts', $category->posts()->simplePaginate(5))
+            ->with('trending_posts', Post::latest()->limit(4)->get());
+
     }
 }

@@ -47,7 +47,7 @@
                         <div class="col-lg-4">
                             <div class="post-entry-1 lg">
                                 <a href="{{route('show-post', $post->id)}}"><img src="{{asset('storage/'.$latest_post->image)}}" alt="" class="img-fluid"></a>
-                                <div class="post-meta"><span class="date">{{$latest_post->category->name}}</span> <span class="mx-1">&bullet;</span> <span>{{$latest_post->created_at->diffForHumans()}}</span></div>
+                                <div class="post-meta"><span class="date"><a href="{{route('blog.category', $post->category->id)}}">{{$latest_post->category->name}}</a></span> <span class="mx-1">&bullet;</span> <span>{{$latest_post->created_at->diffForHumans()}}</span></div>
                                 <h2><a href="single-post.html">{{$latest_post->title}}</a></h2>
                                 <p class="mb-4 d-block">{{$latest_post->description}}</p>
 
@@ -67,7 +67,7 @@
                                     @foreach($trending_posts as $post)
                                         <div class="post-entry-1">
                                             <a href="{{route('show-post', $post->id)}}"><img src="{{asset('storage/'.$post->image)}}" alt="" class="img-fluid"></a>
-                                            <div class="post-meta"><span class="date">{{$post->category->name}}</span> <span class="mx-1">&bullet;</span> <span>{{$post->created_at->diffForHumans()}}</span></div>
+                                            <div class="post-meta"><span class="date"><a href="{{route('blog.category', $post->category->id)}}">{{$post->category->name}}</a></span> <span class="mx-1">&bullet;</span> <span>{{$post->created_at->diffForHumans()}}</span></div>
                                             <h2><a href="{{route('show-post', $post->id)}}">{{$post->title}}</a></h2>
                                         </div>
                                         @endforeach
@@ -76,7 +76,7 @@
                                     @foreach($old_posts as $post)
                                         <div class="post-entry-1">
                                             <a href="{{route('show-post', $post->id)}}"><img src="{{asset('storage/'.$post->image)}}" alt="" class="img-fluid"></a>
-                                            <div class="post-meta"><span class="date">{{$post->category->name}}</span> <span class="mx-1">&bullet;</span> <span>{{$post->created_at->diffForHumans()}}</span></div>
+                                            <div class="post-meta"><span class="date"><a href="{{route('blog.category', $post->category->id)}}">{{$post->category->name}}</a></span> <span class="mx-1">&bullet;</span> <span>{{$post->created_at->diffForHumans()}}</span></div>
                                             <h2><a href="{{route('show-post', $post->id)}}">{{$post->title}}</a></h2>
                                         </div>
                                     @endforeach
@@ -99,7 +99,9 @@
                                                     </a>
                                                 </li>
                                                @endforeach
+
                                         </ul>
+
                                     </div>
 
                                 </div> <!-- End Trending Section -->

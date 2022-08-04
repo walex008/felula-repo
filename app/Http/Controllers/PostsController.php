@@ -21,6 +21,7 @@ class PostsController extends Controller
      */
     public function __construct()
     {
+        //This is to verify if a category exists before creating post
         $this->middleware(['VerifyCategoryExist'])->only('create', 'store');
     }
 
@@ -141,11 +142,15 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
+        //Get the exact post to thrash
         $post = Post::withTrashed()->where('id', $id)->firstOrFail();
+
+        //If the post has been trashed already, force delete it.
         if($post->trashed()){
             $post->deleteImage();
             $post->forceDelete();
         }else{
+            //Trash post
             $post->delete();
         }
 
@@ -168,6 +173,11 @@ class PostsController extends Controller
         return view('posts.index')->with('posts', $trashed);
     }
 
+    /**
+     * Restore thrashed posts.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function restore($id){
 
         $post = Post::withTrashed()->where('id', $id)->firstOrFail();
@@ -179,6 +189,13 @@ class PostsController extends Controller
         return redirect()->back();
     }
 
+
+    /**
+     * Import functionality to excel and csv file
+     * for mass post creation from external file.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function upload(){
         return view('posts.upload')->with('posts', Post::all());
     }
